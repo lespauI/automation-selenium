@@ -85,8 +85,7 @@ public class SignUpTests extends BaseTestClass {
     switch (validationCss) {
       case "#nameError" -> Assertions.assertEquals("Please enter your name.", signUpPage.nameError.getText());
       case "#emailError" -> Assertions.assertEquals("Please enter your email address.", signUpPage.emailError.getText());
-      case "#passwordError" -> signUpPage.checkTextForElement(
-          signUpPage.getElementByAutotestId("div", "please-enter-your-password-1"),
+      case "#passwordError" -> Assertions.assertEquals(signUpPage.getEmptyPasswordAlert().getText(),
           "Please enter your password.");
       case "#termsError" -> Assertions.assertEquals("Please agree with the Terms to sign up.", signUpPage.termsError.getText());
       default -> Assertions.assertTrue(signUpPage.isPageDisplayed());

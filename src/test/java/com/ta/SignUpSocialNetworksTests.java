@@ -27,7 +27,7 @@ public class SignUpSocialNetworksTests extends BaseTestClass {
   @ValueSource(strings = {"google", "slack", "office365", "facebook"})
   @Tag("Positive")
   public void checkSignUpWithSocialMedia(String socialNetwork) {
-    signUpPage.getElementByCssSelector("button[data-soc='" + socialNetwork + "']").click();
+    signUpPage.getSocialNetworkAuth(socialNetwork).click();
     socialNetworkPopUp = new SocialNetworkPopUp(driver);
 
     driver = socialNetworkPopUp.signUpWithSocialNetwork(true);
@@ -36,22 +36,10 @@ public class SignUpSocialNetworksTests extends BaseTestClass {
   }
 
   @Test()
-  @DisplayName("Validate sign up with apple redirect to apple page")
-  @Tag("Positive")
-  public void checkSignUpWithApple() {
-    signUpPage.getElementByCssSelector("#apple-auth").click();
-    socialNetworkPopUp = new SocialNetworkPopUp(driver);
-
-    driver = socialNetworkPopUp.signUpWithSocialNetwork(true);
-    Assertions.assertTrue(driver.getCurrentUrl().contains("apple"),
-        "Redirect to apple page has failed");
-  }
-
-  @Test()
   @DisplayName("Validate sign up with social network checkbox validation")
   @Tag("Negative")
   public void checkSignUpWithOutCheckbox() {
-    signUpPage.getElementByCssSelector("#apple-auth").click();
+    signUpPage.getSocialNetworkAuth("#apple-auth").click();
     socialNetworkPopUp = new SocialNetworkPopUp(driver);
 
     socialNetworkPopUp.signUpWithSocialNetwork(false);

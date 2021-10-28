@@ -17,15 +17,13 @@ public abstract class BasePage<S extends BasePage> {
     PageFactory.initElements(driver, this);
   }
 
-  public abstract boolean isPageDisplayed();
-
   public Object openPage(Driver driver) {
     driver.get(pageUrl);
     Assertions.assertTrue(isPageDisplayed());
     return this;
   }
 
-  public boolean isElementExist(WebElement webElement) {
+  protected boolean isElementExist(WebElement webElement) {
     try {
       webElement.isDisplayed();
       return true;
@@ -34,16 +32,15 @@ public abstract class BasePage<S extends BasePage> {
     }
   }
 
-  public WebElement getElementByAutotestId(String type, String id) {
+  protected WebElement getElementByAutotestId(String type, String id) {
     return driver.findElement(By.cssSelector(type + String.format("[data-autotest-id='%1$s']", id)));
   }
 
-  public WebElement getElementByCssSelector(String css) {
+  protected WebElement getElementByCssSelector(String css) {
     return driver.findElement(By.cssSelector(css));
 
   }
 
-  public void checkTextForElement(WebElement element, String text) {
-    Assertions.assertEquals(text, element.getText());
-  }
+  protected abstract boolean isPageDisplayed();
+
 }

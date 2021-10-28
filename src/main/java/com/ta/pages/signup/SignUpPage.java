@@ -33,6 +33,7 @@ public class SignUpPage extends BasePage<SignUpPage> {
   @FindBy(how = How.CSS, using = "a[data-autotest-id='mr-link-signin-1']")
   private WebElement signInButton;
 
+
   /*
    * Error messages block
    */
@@ -73,4 +74,11 @@ public class SignUpPage extends BasePage<SignUpPage> {
     return new SignInPage(driver);
   }
 
+  public WebElement getSocialNetworkAuth(String socialNetwork) {
+    return getElementByCssSelector("button[data-soc='" + socialNetwork + "']");
+  }
+
+  public WebElement getEmptyPasswordAlert() {
+    return this.getElementByAutotestId("div", "please-enter-your-password-1");
+  }
 }
